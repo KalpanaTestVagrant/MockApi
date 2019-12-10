@@ -1,0 +1,39 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.9.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'com.palantir.docker' version '0.22.1'
+	id 'java'
+}
+group = 'com.rapido.dbservice'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+}
+repositories {
+	mavenCentral()
+}
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	compileOnly 'org.projectlombok:lombok'
+	compile("org.springframework.boot:spring-boot-starter-web")
+	annotationProcessor 'org.projectlombok:lombok'
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+docker {
+	dependsOn build
+	name "rapidoautomation/dbservice-dev"
+	files bootJar.archivePath
+	buildArgs(['JAR_FILE': "${bootJar.archiveName}"])
+}
+
+bootRun {
+		systemProperties System.properties
+}
