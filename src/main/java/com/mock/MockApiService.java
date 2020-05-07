@@ -1,13 +1,13 @@
-package com.rapido.dbservice.dbservice;
+package com.mock;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DbserviceApplication {
+public class MockApiService {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DbserviceApplication.class, args);
+		SpringApplication.run(MockApiService.class, args);
 	}
 
 }

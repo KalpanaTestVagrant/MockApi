@@ -21,17 +21,12 @@ repositories {
 }
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-	compileOnly 'org.projectlombok:lombok'
 	compile("org.springframework.boot:spring-boot-starter-web")
 	annotationProcessor 'org.projectlombok:lombok'
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-docker {
-	dependsOn build
-	name "rapidoautomation/dbservice-dev"
-	files bootJar.archivePath
-	buildArgs(['JAR_FILE': "${bootJar.archiveName}"])
+	testCompile group: 'org.mockito', name: 'mockito-core', version: '2.1.0'
+
 }
 
 bootRun {
